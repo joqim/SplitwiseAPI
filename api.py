@@ -1,11 +1,9 @@
 from flask import Flask, jsonify, render_template, redirect, session, url_for, request
 from splitwise import Splitwise
-import config as Config
 from flask_cors import cross_origin
 import json
 from splitwise.expense import Expense
 from splitwise.user import ExpenseUser
-import webbrowser
 import datetime
 
 app = Flask(__name__)
