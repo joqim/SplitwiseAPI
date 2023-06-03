@@ -28,7 +28,7 @@ def get_ordinal_suffix(day):
         else:
             return "th"
 
-@app.route('/update', methods=["POST"])
+@app.route('/update', methods=["GET"])
 @cross_origin()
 def update_splitwise():
     try:
