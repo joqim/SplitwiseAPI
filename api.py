@@ -11,7 +11,10 @@ import datetime
 app = Flask(__name__)
 app.secret_key = "joqim"
 secret = ''
-import datetime
+
+@app.route("/")
+def hello():
+    return "Hello, Vercel!"
 
 def get_ordinal_suffix(day):
     if 11 <= day <= 13:
@@ -26,7 +29,6 @@ def get_ordinal_suffix(day):
             return "rd"
         else:
             return "th"
-
 
 @app.route('/update', methods=["POST"])
 @cross_origin()
