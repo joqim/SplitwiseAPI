@@ -14,7 +14,7 @@ secret = ''
 
 @app.route("/")
 def hello():
-    return "Hello, Vercel!"
+    return "Hello, Vercel!!"
 
 def get_ordinal_suffix(day):
     if 11 <= day <= 13:
