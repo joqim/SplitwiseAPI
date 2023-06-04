@@ -12,6 +12,7 @@ secret = ''
 
 @app.route("/")
 def hello():
+    print("inside / dir", flush=True)
     return "Hello, Vercel!!"
 
 def get_ordinal_suffix(day):
