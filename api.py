@@ -79,8 +79,5 @@ def get_ordinal_suffix(day):
         else:
             return "th"
 
-@app.route('/update')
-# @cross_origin()
-
 if __name__ == "__main__":
     app.run(threaded=True, debug=True)
