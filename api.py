@@ -28,67 +28,51 @@ def get_ordinal_suffix(day):
         else:
             return "th"
 
-@app.route('/update', methods=["GET"])
+@app.route('/update')
 @cross_origin()
 def update_splitwise():
     try:
-        print("inside /update in PYTHON SERVER", flush=True)
+        print("inside /update in PYTHON SERVER", request.args, flush=True)
 
-        CONSUMER_KEY = request.json['CONSUMER_KEY']
-        CONSUMER_SECRET = request.json['CONSUMER_SECRET']
-        API_KEY = request.json['API_KEY']
-        #print("api", API_KEY, flush=True)
+        group_id = request.args.get('group_id')
+        total_money_paid = request.args.get('total_paid')
 
-        group_id = request.json['group_id']
+        CONSUMER_KEY = request.args.get('CONSUMER_KEY')
+        CONSUMER_SECRET = request.args.get('CONSUMER_SECRET')
+        API_KEY = request.args.get('API_KEY')
+
+        players = request.args.getlist('players[]')
+        parsed_players = [json.loads(player) for player in players]
 
         sObj = Splitwise(CONSUMER_KEY, CONSUMER_SECRET, api_key=API_KEY)
 
-        # joe Id - 43611566
-        # pras Id = 30618134
-        # Test group Id - 44555421
-
-        members = request.json['players']
-        #print("members", members, flush=True)
-        #print("first member", members[0]['id'], flush=True)
-
-        total_money_paid = request.json['total_paid']
-        #print("total_money_paid", total_money_paid, flush=True)
-
         expense = Expense()
         expense.setCost(total_money_paid)
-        # expense.setCost('2.0')
 
         users = []
-        for member in members:
+        for member in parsed_players:
             user = ExpenseUser()
             user.setId(member['id'])
 
-            #print("money value", member['money'], flush=True)
             if float(member['money']) > 0:
                 user.setPaidShare(member['money'])
-                # user.setPaidShare('2.00')
             else:
                 money = abs(float(member['money']))
-                #print("money negative", money, flush=True)
                 user.setOwedShare(str(money))
-                # user.setOwedShare('2.00')
 
             users.append(user)
 
-        # Set description as current date with ordinal suffix
         current_date = datetime.datetime.now().strftime("%B-%d")
         day = int(current_date.split("-")[1])
         ordinal_suffix = get_ordinal_suffix(day)
         current_date_with_suffix = current_date.replace(f"{day:02d}", f"{day}{ordinal_suffix}")
-        #print("desc", current_date_with_suffix)
         expense.setDescription(current_date_with_suffix)
 
         expense.setUsers(users)
         expense.setGroupId(group_id)
 
         sObj.createExpense(expense)
-
-        print("expense updated successfully", flush=True)
+        print("expense updated successfully", expense, flush=True)
 
         res = dict()
         res['message'] = 'success'
@@ -101,4 +85,4 @@ def update_splitwise():
         return jsonify(res), 400
 
 if __name__ == "__main__":
-    app.run(threaded=True,debug=True)
+    app.run(threaded=True, debug=True)
