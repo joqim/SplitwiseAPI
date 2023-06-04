@@ -13,25 +13,7 @@ secret = ''
 @app.route("/")
 def hello():
     print("inside / dir", flush=True)
-    return "Hello, Vercel!!"
-
-def get_ordinal_suffix(day):
-    if 11 <= day <= 13:
-        return "th"
-    else:
-        last_digit = day % 10
-        if last_digit == 1:
-            return "st"
-        elif last_digit == 2:
-            return "nd"
-        elif last_digit == 3:
-            return "rd"
-        else:
-            return "th"
-
-@app.route('/update')
-# @cross_origin()
-def update_splitwise():
+    def update_splitwise():
     try:
         print("inside /update in PYTHON SERVER", request.args, flush=True)
 
@@ -84,6 +66,23 @@ def update_splitwise():
         res = dict()
         res['message'] = 'error'
         return jsonify(res), 400
+
+def get_ordinal_suffix(day):
+    if 11 <= day <= 13:
+        return "th"
+    else:
+        last_digit = day % 10
+        if last_digit == 1:
+            return "st"
+        elif last_digit == 2:
+            return "nd"
+        elif last_digit == 3:
+            return "rd"
+        else:
+            return "th"
+
+@app.route('/update')
+# @cross_origin()
 
 if __name__ == "__main__":
     app.run(threaded=True, debug=True)
