@@ -29,7 +29,7 @@ def get_ordinal_suffix(day):
             return "th"
 
 @app.route('/update')
-@cross_origin()
+# @cross_origin()
 def update_splitwise():
     try:
         print("inside /update in PYTHON SERVER", request.args, flush=True)
