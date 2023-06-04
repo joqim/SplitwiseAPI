@@ -11,9 +11,7 @@ app.secret_key = "joqim"
 secret = ''
 
 @app.route("/")
-def hello():
-    print("inside / dir", flush=True)
-    def update_splitwise():
+def update_splitwise():
     try:
         print("inside /update in PYTHON SERVER", request.args, flush=True)
 
