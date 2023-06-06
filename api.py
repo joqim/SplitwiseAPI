@@ -79,5 +79,21 @@ def get_ordinal_suffix(day):
         else:
             return "th"
 
+
+@app.route("/test")
+def test():
+    try:
+        print("inside /test in PYTHON SERVER", request.args, flush=True)
+
+        res = dict()
+        res['message'] = 'success'
+
+        return jsonify(res), 200
+    except Exception as e:
+        print("An error occurred:", str(e), flush=True)
+        res = dict()
+        res['message'] = 'error'
+        return jsonify(res), 400
+    
 if __name__ == "__main__":
     app.run(threaded=True, debug=True)
