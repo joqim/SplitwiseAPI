@@ -7,9 +7,12 @@
 	],
 	"routes":[
 		{
-			"src":"(.*)",
-			"dest":"."
+			"src":"/",
+			"dest":"api.py"
+		},
+		{
+			"src":"/test",
+			"dest":"api.py"
 		}
-
 	]
 }
