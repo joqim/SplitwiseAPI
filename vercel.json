@@ -7,11 +7,27 @@
 	],
 	"routes":[
 		{
-			"src":"/",
+			"src":"/update",
 			"dest":"api.py"
 		},
 		{
 			"src":"/test",
+			"dest":"api.py"
+		},
+		{
+			"src":"/auth_code",
+			"dest":"api.py"
+		},
+		{
+			"src":"/access_token",
+			"dest":"api.py"
+		},
+		{
+			"src":"/groups",
+			"dest":"api.py"
+		},
+		{
+			"src":"/players",
 			"dest":"api.py"
 		}
 	]
