@@ -63,10 +63,6 @@ def oauth_callback():
         
         print("access token", access_token, flush=True)
         session['access_token'] = access_token
-
-        # sObj.setAccessToken(session['access_token'])
-        # group = sObj.getGroup(28857816)
-        # print("group", group.getMembers()[0], flush=True)
         
         res = {"token": access_token}
         return jsonify(res), 200
