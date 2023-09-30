@@ -1,2 +1,2 @@
-# react-nodejs-example
-Example Project demonstrating how to develop React application with Nodejs 
+# Custom Splitwise API
+Spin up a quickie Flask API server to handle requests from Settler.
